@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Octavian - AI Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Onboarding Page -->
+    <div id="onboarding" class="onboarding">
+        <div class="onboarding-content">
+            <div class="onboarding-progress">
+                <button class="progress-dot active" data-step="0" aria-label="Step 1"></button>
+                <button class="progress-dot" data-step="1" aria-label="Step 2"></button>
+                <button class="progress-dot" data-step="2" aria-label="Step 3"></button>
+                <button class="progress-dot" data-step="3" aria-label="Step 4"></button>
+                <button class="progress-dot" data-step="4" aria-label="Step 5"></button>
+            </div>
+
+            <div class="onboarding-steps">
+                <section class="onboarding-step active" data-step="0">
+                    <div class="logo">
+                        <span class="logo-octopus">🐙</span>
+                        <h1>Octavian</h1>
+                    </div>
+                    <p class="tagline">Your Intelligent AI Assistant</p>
+                    <div class="features-preview">
+                        <div class="feature-item">
+                            <i class="fas fa-users"></i>
+                            <span>Multiple Personalities</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-search"></i>
+                            <span>Web Search</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Real-time Updates</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-image"></i>
+                            <span>Image Search</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="onboarding-step" data-step="1">
+                    <h2 class="onboarding-title">Make It Yours</h2>
+                    <p class="onboarding-subtitle">Choose a theme and set your default city.</p>
+                    <div class="onboarding-form">
+                        <div class="form-group">
+                            <span class="form-label">Theme</span>
+                            <div class="theme-options">
+                                <label class="theme-option">
+                                    <input type="radio" name="onboarding-theme" value="blue-green">
+                                    <span>Blue &amp; Green</span>
+                                </label>
+                                <label class="theme-option">
+                                    <input type="radio" name="onboarding-theme" value="dark">
+                                    <span>Dark Mode</span>
+                                </label>
+                                <label class="theme-option">
+                                    <input type="radio" name="onboarding-theme" value="light">
+                                    <span>Light Mode</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="onboarding-location">Default Location</label>
+                            <input id="onboarding-location" type="text" placeholder="City name">
+                        </div>
+                    </div>
+                </section>
+
+                <section class="onboarding-step" data-step="2">
+                    <h2 class="onboarding-title">Enable Features</h2>
+                    <p class="onboarding-subtitle">Control what Octavian can use by default.</p>
+                    <div class="onboarding-form">
+                        <label class="toggle-card">
+                            <div>
+                                <span class="toggle-title">Web Search</span>
+                                <span class="toggle-desc">Bring in live sources when needed.</span>
+                            </div>
+                            <input id="onboarding-search" type="checkbox">
+                            <span class="toggle-switch"></span>
+                        </label>
+                        <label class="toggle-card">
+                            <div>
+                                <span class="toggle-title">Image Search</span>
+                                <span class="toggle-desc">Generate and explore images.</span>
+                            </div>
+                            <input id="onboarding-images" type="checkbox">
+                            <span class="toggle-switch"></span>
+                        </label>
+                    </div>
+                </section>
+
+                <section class="onboarding-step" data-step="3">
+                    <h2 class="onboarding-title">Connect Your Keys</h2>
+                    <p class="onboarding-subtitle">Optional — you can skip and add these later in Settings.</p>
+                    <div class="onboarding-form">
+                        <div class="form-group">
+                            <label class="form-label" for="onboarding-llm-provider">AI Model Provider</label>
+                            <select id="onboarding-llm-provider">
+                                <option value="nvidia">NVIDIA AI (Kimi-k2.5 thinking)</option>
+                                <option value="pollinations">Pollinations AI (Free / No Key)</option>
+                                <option value="openai">OpenAI (GPT-4o/Mini)</option>
+                                <option value="gemini">Google Gemini</option>
+                                <option value="ollama">Ollama (Local DeepSeek-R1)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="onboarding-llm-key">AI Key / Model</label>
+                            <input id="onboarding-llm-key" type="text" placeholder="API key, model name, or any string">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="onboarding-search-provider">Search Provider</label>
+                            <select id="onboarding-search-provider">
+                                <option value="google">Google Custom Search</option>
+                                <option value="tavily">Tavily AI Search</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="onboarding-search-key">Search Key</label>
+                            <input id="onboarding-search-key" type="text" placeholder="Any key or token">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="onboarding-search-cx">Google Search Engine ID (CX)</label>
+                            <input id="onboarding-search-cx" type="text" placeholder="0123456789...">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="onboarding-weather-key">Weather API Key</label>
+                            <input id="onboarding-weather-key" type="text" placeholder="Optional weather key">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="onboarding-news-key">News API Key</label>
+                            <input id="onboarding-news-key" type="text" placeholder="Optional news key">
+                        </div>
+                    </div>
+                </section>
+
+                <section class="onboarding-step" data-step="4">
+                    <h2 class="onboarding-title">Ready To Launch</h2>
+                    <p class="onboarding-subtitle">Here is your setup.</p>
+                    <div id="onboarding-summary" class="onboarding-summary"></div>
+                </section>
+            </div>
+
+            <div class="onboarding-actions">
+                <button id="onboarding-skip" class="onboarding-link">Skip</button>
+                <div class="onboarding-nav">
+                    <button id="onboarding-back" class="onboarding-btn secondary">Back</button>
+                    <button id="onboarding-next" class="onboarding-btn primary">Next</button>
+                    <button id="onboarding-start" class="onboarding-btn primary hidden">Start Chatting</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app" class="app hidden">
+        <!-- Side Panel -->
+        <aside class="side-panel">
+            <div class="panel-header">
+                <div class="logo-small">
+                    <span class="logo-octopus logo-octopus-small">🐙</span>
+                    <span>Octavian</span>
+                </div>
+            </div>
+
+            <!-- Widgets -->
+            <div class="widgets">
+                <!-- Weather Widget -->
+                <div class="widget weather-widget">
+                    <h4><i class="fas fa-cloud-sun"></i> Weather</h4>
+                    <div id="weather-content" class="widget-content">
+                        <div class="loading">Loading...</div>
+                    </div>
+                </div>
+
+                <!-- Stocks Widget -->
+                <div class="widget stocks-widget">
+                    <h4><i class="fas fa-chart-line"></i> Stocks</h4>
+                    <div id="stocks-content" class="widget-content">
+                        <div class="loading">Loading...</div>
+                    </div>
+                </div>
+
+                <!-- News Widget -->
+                <div class="widget news-widget">
+                    <h4><i class="fas fa-newspaper"></i> Top News</h4>
+                    <div id="news-content" class="widget-content">
+                        <div class="loading">Loading...</div>
+                    </div>
+                </div>
+
+                <!-- Social Media Widget -->
+                <div class="widget social-widget">
+                    <h4><i class="fas fa-share-alt"></i> Social</h4>
+                    <div id="social-content" class="widget-content">
+                        <div class="social-icons">
+                            <i class="fab fa-twitter"></i>
+                            <i class="fab fa-facebook"></i>
+                            <i class="fab fa-instagram"></i>
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <p class="social-placeholder">Connect your accounts</p>
+                    </div>
+                </div>
+            </div>
+
+            <button id="toggle-panel" class="toggle-panel">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="main-content">
+            <!-- Chat Header -->
+            <header class="chat-header">
+                <div class="header-left">
+                    <div class="current-agent">
+                        <div class="agent-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="agent-info">
+                            <h2 id="agent-name">General Assistant</h2>
+                            <span id="agent-status" class="status online">Online</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header-actions">
+                    <button id="clear-chat" class="icon-btn" title="Clear Chat">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <button id="settings-btn" class="icon-btn" title="Settings">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Chat Messages -->
+            <div id="chat-messages" class="chat-messages">
+                <div class="welcome-message">
+                    <div class="message-avatar">
+                        <span class="logo-octopus logo-octopus-avatar">🐙</span>
+                    </div>
+                    <div class="message-content">
+                        <p class="message-text">Hello! I'm Octavian, your AI assistant. How can I help you today?</p>
+                        <div class="suggestions">
+                            <button class="suggestion-btn">Search the web</button>
+                            <button class="suggestion-btn">Help me write</button>
+                            <button class="suggestion-btn">Code something</button>
+                            <button class="suggestion-btn">What's the weather?</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Web AI Container -->
+            <div id="web-ai-container" class="hidden" style="flex: 1; height: 100%; width: 100%; background: var(--bg-dark);">
+                <iframe id="web-ai-iframe" src="" width="100%" height="100%" frameborder="0"></iframe>
+            </div>
+
+            <!-- Input Area with Model Selector (Claude-style) -->
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <div class="model-selector-bar">
+                        <div class="model-dropdown-trigger" id="model-dropdown-trigger">
+                            <i class="fas fa-robot"></i>
+                            <span class="model-name">General</span>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </div>
+                        <div class="model-features">
+                            <button class="feature-toggle" id="search-toggle" title="Web Search">
+                                <i class="fas fa-globe"></i>
+                            </button>
+                            <button class="feature-toggle" id="image-toggle" title="Image Search">
+                                <i class="fas fa-image"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="attachment-preview" class="attachment-preview hidden"></div>
+                    <div class="input-container">
+                        <input type="file" id="file-upload-input" class="file-upload-input" multiple>
+                        <button id="upload-btn" class="upload-btn" title="Upload files">
+                            <i class="fas fa-paperclip"></i>
+                        </button>
+                        <textarea id="user-input" placeholder="Message Octavian..." rows="1"></textarea>
+                        <button id="send-btn" class="send-btn" title="Send message">
+                            <i class="fas fa-arrow-up"></i>
+                        </button>
+                    </div>
+                                        
+                    <!-- Model Dropdown Menu -->
+                    <div class="model-dropdown" id="model-dropdown">
+                        <div class="dropdown-header">
+                            <span>Select Agent</span>
+                        </div>
+                        <div class="model-options">
+                            <button class="model-option active" data-agent="general">
+                                <div class="model-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="model-info">
+                                    <span class="model-title">General</span>
+                                    <span class="model-desc">Everyday tasks and questions</span>
+                                </div>
+                            </button>
+                            <button class="model-option" data-agent="coding">
+                                <div class="model-icon">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <div class="model-info">
+                                    <span class="model-title">Coding</span>
+                                    <span class="model-desc">Programming and debugging</span>
+                                </div>
+                            </button>
+                            <button class="model-option" data-agent="researcher">
+                                <div class="model-icon">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <div class="model-info">
+                                    <span class="model-title">Researcher</span>
+                                    <span class="model-desc">Deep research and analysis</span>
+                                </div>
+                            </button>
+                            <button class="model-option" data-agent="writer">
+                                <div class="model-icon">
+                                    <i class="fas fa-pen"></i>
+                                </div>
+                                <div class="model-info">
+                                    <span class="model-title">Writer</span>
+                                    <span class="model-desc">Content creation and editing</span>
+                                </div>
+                            </button>
+                            <button class="model-option" data-agent="news">
+                                <div class="model-icon">
+                                    <i class="fas fa-newspaper"></i>
+                                </div>
+                                <div class="model-info">
+                                    <span class="model-title">News</span>
+                                    <span class="model-desc">Current events and updates</span>
+                                </div>
+                            </button>
+                            <button class="model-option" data-agent="weather">
+                                <div class="model-icon">
+                                    <i class="fas fa-cloud-sun"></i>
+                                </div>
+                                <div class="model-info">
+                                    <span class="model-title">Weather</span>
+                                    <span class="model-desc">Forecasts and conditions</span>
+                                </div>
+                            </button>
+                            <button class="model-option" data-agent="stocks">
+                                <div class="model-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="model-info">
+                                    <span class="model-title">Stocks</span>
+                                    <span class="model-desc">Market analysis and trends</span>
+                                </div>
+                            </button>
+                            <button class="model-option" data-agent="entertainment">
+                                <div class="model-icon">
+                                    <i class="fas fa-film"></i>
+                                </div>
+                                <div class="model-info">
+                                    <span class="model-title">Entertainment</span>
+                                    <span class="model-desc">Recommendations and reviews</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-footer">
+                    <span class="hint-text">Octavian may make mistakes. Please verify important information.</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <button id="close-settings" class="close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="setting-item">
+                    <label>AI Model Provider</label>
+                    <select id="llm-provider">
+                        <option value="nvidia">NVIDIA AI (Kimi-k2.5 thinking)</option>
+                        <option value="pollinations">Pollinations AI (Free / No Key)</option>
+                        <option value="openai">OpenAI (GPT-4o/Mini)</option>
+                        <option value="gemini">Google Gemini</option>
+                        <option value="ollama">Ollama (Local DeepSeek-R1)</option>
+                    </select>
+                </div>
+                <div class="setting-item" id="ollama-url-container">
+                    <label>Ollama Base URL</label>
+                    <input type="text" id="ollama-url" placeholder="http://localhost:11434">
+                </div>
+                <div class="setting-item">
+                    <label>Brain Key / Model (anything)</label>
+                    <input type="text" id="llm-api-key" placeholder="API key, model name, or any string">
+                </div>
+                
+                <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
+                
+                <div class="setting-item">
+                    <label>Search Provider</label>
+                    <select id="search-provider">
+                        <option value="google">Google Custom Search</option>
+                        <option value="tavily">Tavily AI Search</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>Search Key (anything)</label>
+                    <input type="text" id="search-api-key" placeholder="Any key or token">
+                </div>
+                <div class="setting-item" id="google-cx-container">
+                    <label>Google Search Engine ID (CX)</label>
+                    <input type="text" id="search-engine-id" placeholder="0123456789...">
+                    <p style="font-size: 0.7rem; color: var(--text-secondary); margin-top: 0.25rem;">
+                        Required for Google Search.
+                    </p>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 1.5rem 0;">
+
+                <div class="setting-item">
+                    <label>Theme</label>
+                    <select id="theme-select">
+                        <option value="blue-green">Blue & Green</option>
+                        <option value="dark">Dark Mode</option>
+                        <option value="light">Light Mode</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label>Default Location</label>
+                    <input type="text" id="default-location" placeholder="City name">
+                </div>
+
+                <div class="setting-item">
+                    <label>Weather API Key (optional)</label>
+                    <input type="text" id="weather-api-key" placeholder="Key for your weather service">
+                </div>
+
+                <div class="setting-item">
+                    <label>News API Key (optional)</label>
+                    <input type="text" id="news-api-key" placeholder="Key for your news service">
+                </div>
+                
+                <button id="save-settings-btn" class="start-btn" style="width: 100%; margin-top: 1rem;">
+                    Save & Start Chatting
+                </button>
+                <button id="reset-onboarding-btn" class="secondary-btn" style="width: 100%; margin-top: 0.75rem;">
+                    Reset Onboarding
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
